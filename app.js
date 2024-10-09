@@ -1,13 +1,12 @@
 const express = require("express");
 const path = require("path");
-// const indexRouter = require("./routes/indexRouter");
-// const newRouter = require("./routes/newRouter");
 const messagesRouter = require("./routes/messagesRouter");
 
 // set up express app
 const app = express();
 
 // middleware
+
 // configure EJS
 app.set("view engine", "ejs");
 
@@ -19,9 +18,6 @@ app.use(express.static(assetsPath));
 app.use(express.urlencoded({ extended: true }));
 
 // routers
-// app.use("/new", newRouter);
-// app.use("/", indexRouter);
-
 app.use("/", messagesRouter);
 
 // error handler
