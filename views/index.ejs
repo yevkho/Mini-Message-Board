@@ -1,0 +1,16 @@
+<html>
+  <head>
+    <title>Homepage</title>
+  </head>
+  <body>
+    <div>Home Page</div>
+    <% messages.map((message, index) => { %>
+    <h3><%= message.user %></h3>
+    <p><%= message.text %></p>
+    <p><%= message.added %></p>
+    <a href="/<%= index%>">Open</a>
+    <hr />
+    <% }) %>
+    <button onClick="location.href='/new'">New Message</button>
+  </body>
+</html>
