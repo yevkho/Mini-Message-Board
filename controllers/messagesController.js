@@ -1,37 +1,32 @@
-const messages = [
-  {
-    text: "Hi there!",
-    user: "Amado",
-    added: new Date(),
-  },
-  {
-    text: "Hello World!",
-    user: "Charles",
-    added: new Date(),
-  },
-];
+const db = require("../db/queries");
 
-const getMessages = (req, res) => {
-  res.render("index.ejs", { messages });
+// 1
+const getMessages = async (req, res) => {
+  const rawMessages = await db.getAllMessages();
+  res.render("index.ejs", { rawMessages });
 };
 
+// 2
 const getNew = (req, res) => {
   res.render("form.ejs");
 };
 
-const createNew = (req, res) => {
-  messages.push({
-    text: req.body.message,
-    user: req.body.author,
-    added: new Date(),
-  });
-
+// 3
+const createNew = async (req, res) => {
+  const { author, message } = req.body;
+  await db.insertMessage({ author, message });
   res.redirect("/");
 };
 
-const getMessageById = (req, res) => {
+// 4
+const getMessageById = async (req, res) => {
   const { messageId } = req.params;
-  res.render("message.ejs", { message: messages[messageId] });
+  console.log(req.params);
+  console.log(messageId);
+
+  const selectedMessage = await db.getMessageById(messageId);
+  console.log(selectedMessage);
+  res.render("message.ejs", { selectedMessage });
 };
 
 module.exports = { getMessages, getNew, createNew, getMessageById };

@@ -3,11 +3,11 @@
     <title>Message Board</title>
   </head>
   <body>
-    <% messages.map((message, index) => { %>
-    <h3><%= message.user %></h3>
-    <p><%= message.text %></p>
-    <p><%= message.added %></p>
-    <a href="/<%= index%>">Open</a>
+    <% rawMessages.map((message) => { %>
+    <h3><%= message.username %></h3>
+    <p><%= message.message_text %></p>
+    <p><%= message.added_date %></p>
+    <a href="/<%= message.id%>">Open</a>
     <hr />
     <% }) %>
     <button onClick="location.href='/new'">New Message</button>

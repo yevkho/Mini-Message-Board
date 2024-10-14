@@ -1,4 +1,5 @@
 const express = require("express");
+require("dotenv").config();
 const path = require("path");
 const messagesRouter = require("./routes/messagesRouter");
 
@@ -6,13 +7,15 @@ const messagesRouter = require("./routes/messagesRouter");
 const app = express();
 
 // middleware
-
 // configure EJS
 app.set("view engine", "ejs");
 
 // set up static assets serving
 const assetsPath = path.join(__dirname, "public");
 app.use(express.static(assetsPath));
+
+// ignore browser auto favicon request
+app.get("/favicon.ico", (req, res) => res.status(204).end());
 
 // parse form data into req.body
 app.use(express.urlencoded({ extended: true }));
